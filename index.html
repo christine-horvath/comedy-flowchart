@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 /*Now the CSS*/
-* {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
-    column-span: all;
-    }
+* {margin: 0; padding: 0;}
 
 /*this shifts top bubble and line below down*/
 .tree ul {
@@ -116,6 +112,42 @@ right connector from last child*/
 	border-color:  #94a0b4;
 }
 
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+
 </style>
 </head>
 <body>
@@ -127,23 +159,19 @@ right connector from last child*/
 			<a href="#">Someone tells you they're a comedian...</a>
 			<ul>
 				<li>
-					<a href="#">That's so cool!</a>
+                    <a href="#">That's so cool!</a>
 					<ul>
+                        <li>
+                            <a href="#">Tell me a joke!</a>
+                            <ul>
+                                <li>
+                                    <a href="#">No. Come to a show, damnit.</a>
+                                </li>
+                            </ul>
+                        </li>
 						<li>
                             <a href="#">How'd you get into it?!</a>
                             <ul>
-                                <li>
-                                    <a href="#">Delusional Confidence</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Everyone says I should do stand-up</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Do they? Do it. You won't.</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
                                     <li>
                                         <a href="#">*Insert Sad Life Event</a>
                                         <ul>
@@ -157,10 +185,7 @@ right connector from last child*/
                                                                 <a href="#">*Offers Idea for a Joke*</a>
                                                                 <ul>
                                                                     <li>
-                                                                        <a href="#">Don't.</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">Just trust me.</a>
+                                                                        <a href="#">Don't. Just trust me.</a>
                                                                         <ul>
                                                                             <li>
                                                                                 <a href="#">Where do you perform?</a>
@@ -172,7 +197,7 @@ right connector from last child*/
                                                                                                 <a href="#">What do you say in your little skits?</a>
                                                                                                 <ul>
                                                                                                     <li>
-                                                                                                        <a href="#">Just say jokes. Or bits. Never skits. <br> Even if you're talking about Saturday Night Live,<br> those are "sketches," not "skits." <br> Skits are reserved for church camp <br>cautionary tales and corporate role plays.</a>
+                                                                                                        <a href="#">Just say jokes.<br> Or bits.<br> Never skits. <br> Even if you're talking about<br> Saturday Night Live,<br> those are "sketches," <br> not "skits." <br> Skits are reserved<br> for church camp <br>cautionary tales and <br>corporate role plays.</a>
                                                                                                     </li>
                                                                                                 </ul>
                                                                                             </li>
@@ -180,10 +205,10 @@ right connector from last child*/
                                                                                                 <a href="#">What's it like to be a woman in comedy?</a>
                                                                                                 <ul>
                                                                                                     <li>
-                                                                                                        <a href="#">Tread Lightly. Female comics are asked this <br> so often that they may lose their shit on you.</a>
+                                                                                                        <a href="#">Tread Lightly.<br> Female comics are asked this <br> so often that they may<br> lose their shit on you.</a>
                                                                                                     </li>
                                                                                                     <li>
-                                                                                                        <a href="#">Rough. Like so many other things <br> when you're a woman.</a>
+                                                                                                        <a href="#">Rough. Like so<br> many other things <br> when you're a woman.</a>
                                                                                                     </li>
                                                                                                 </ul>
                                                                                             </li>
@@ -200,21 +225,25 @@ right connector from last child*/
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>     
+                                    </li>  
+                                <li>
+                                    <a href="#">Delusional Confidence</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Everyone says I should do stand-up</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Do they? Do it. You won't.</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>   
                                 </li>
                             </ul>
                         </li>
 					</ul>
 				</li>
-                <li>
-                    <a href="#">Really? Tell me a joke!</a>
-                    <ul>
-                        <li>
-                            <a href="#">No. Come to a show, damnit.</a>
-                        </li>
-                    </ul>
-                    
-                </li>
 			</ul>
 		</li>
 	</ul>
