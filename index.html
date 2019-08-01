@@ -1,182 +1,220 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comedy Flowchart</title>
-    <style>
-     * {
-          box-sizing: border-box;
-          background-color:lightblue;
-        }
-        
-        .row::after {
-          content: "";
-          clear: both;
-          display: table;
-        }
-        
-        [class*="col-"] {
-          float: left;
-          padding: 15px;
-        }
-        
-        html {
-          font-family: "Lucida Sans", sans-serif;
-        }
-        
-        .header {
-          text-align: center;
-          padding: 15px;
-        }
+<style>
+/*Now the CSS*/
+* {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+    column-span: all;
+    }
 
-        .second-row {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .second-row h1, h2, h3 {
-            border-style: solid;
-            border-width: 3px;
-            border-radius: 10px;
-            padding: 5px;
-        }
-        .third-row {
-            display: flex;
-            justify-content: space-between;
-            align-content: center;
-            padding: 0 80px;
-        
-        }
-        .third-row h2 {
-            border-style: solid;
-            border-width: 3px;
-            padding: 5px;
-        }
-        .fourth-row {
-            display: flex;
-            justify-content: space-between;
-            padding-right: 100px;
-        
-        }
-        .fourth-row h2 {
-            border-style: solid;
-            border-width: 3px;
-            padding: 5px;
-        }
-        
-        .menu ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-        }
-        
-        .menu li {
-          padding: 8px;
-          margin-bottom: 7px;
-          background-color: #33b5e5;
-          color: #ffffff;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        }
-        
-        .menu li:hover {
-          background-color: #0099cc;
-        }
-        
-        /* .aside {
-          background-color: #33b5e5;
-          padding: 15px;
-          color: #ffffff;
-          text-align: center;
-          font-size: 14px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        } */
-        
-        .footer {
-          text-align: center;
-          font-size: 12px;
-          padding: 15px;
-        }
-        
-        /* For mobile phones: */
-        [class*="col-"] {
-          width: 100%;
-        }
-        
-        @media only screen and (min-width: 600px) {
-          /* For tablets: */
-          .col-s-1 {width: 8.33%;}
-          .col-s-2 {width: 16.66%;}
-          .col-s-3 {width: 25%;}
-          .col-s-4 {width: 33.33%;}
-          .col-s-5 {width: 41.66%;}
-          .col-s-6 {width: 50%;}
-          .col-s-7 {width: 58.33%;}
-          .col-s-8 {width: 66.66%;}
-          .col-s-9 {width: 75%;}
-          .col-s-10 {width: 83.33%;}
-          .col-s-11 {width: 91.66%;}
-          .col-s-12 {width: 100%;}
-        }
-        @media only screen and (min-width: 768px) {
-          /* For desktop: */
-          .col-1 {width: 8.33%;}
-          .col-2 {width: 16.66%;}
-          .col-3 {width: 25%;}
-          .col-4 {width: 33.33%;}
-          .col-5 {width: 41.66%;}
-          .col-6 {width: 50%;}
-          .col-7 {width: 58.33%;}
-          .col-8 {width: 66.66%;}
-          .col-9 {width: 75%;}
-          .col-10 {width: 83.33%;}
-          .col-11 {width: 91.66%;}
-          .col-12 {width: 100%;}
-        }
+/*this shifts top bubble and line below down*/
+.tree ul {
+	padding-top: 20px; position: relative;
+	
+	/*not sure what this does yet*/ 
+    transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
 
-    </style>
-</head>
+/*this creates the structure of the tree*/ 
+.tree li {
+	float: left; text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+/*horozontal lines and vertical of grand children*/
+.tree li::before, .tree li::after{
+	content: '';
+	position: absolute; top: 0; right: 50%;
+	border-top: 1px solid #ccc;
+	width: 50%; height: 20px;
+}
+/* right horozontal lines*/
+    .tree li::after{
+	right: auto; left: 50%;
+	border-left: 1px solid #ccc;
+} 
+
+/*We need to remove left-right connectors from elements without 
+any siblings - parent and only child grand child*/
+ .tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+ .tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+} 
+/*Adding back the vertical connector to the last nodes*/
+ .tree li:last-child::before{
+	border-right: 1px solid #ccc;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+/*corner radius first child */ 
+ .tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+} 
+
+/*Time to add downward connectors from parents*/
+ .tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px solid #ccc;
+	width: 0; height: 20px;
+} 
+
+/* styles bubbles*/
+
+    .tree li a{
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #666;
+	font-family: arial, verdana, tahoma;
+	font-size: 11px;
+	display: inline-block;
+	
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+} 
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+}
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+	border-color:  #94a0b4;
+}
+
+</style>
 <body>
+<h1></h1>
 
-    <div class="header">
-        <h1>So Your Relative/Coworker/Friend is a Comedian</h1>
-        <p>Avoid being the butt of comedians' jokes with this flowchart</p>
-
-    </div>
-
-    <div class="row">
-        <div class="col-1 col-s-3 menu">
-        
-        </div>
-
-        <div class="col-10 col-s-9">
-            <div class="second-row">
-                <h1>Suddenly you find out that you're...</h1>
-                <h2>TALKING TO A COMEDIAN</h2>
-                <h3>Response Options</h3>
-            </div>
-            <div class="third-row">
-                <h2>That's so cool!</h2>
-                <h2>Everyone tells me I should do stand-up.</h2>
-                <h2>Really? Tell me a joke!</h2>
-            </div>
-            <div class="fourth-row">
-                <h2>How'd you get into it?!</h2> <!--good answer-->
-                <h2>Tell me a joke!</h2> <!--bad answer-->
-                <h2>Do they?</h2> 
-                <h2>No.</h2>
-            </div>
-        </div>
-
-        <div class="col-1 col-s-12">
-        <div class="aside">
-            
-        </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>&copy; Christine Horvath 2019</p>
-    </div>
+<div class="tree">
+	<ul>
+		<li>
+			<a href="#">Someone tells you they're a comedian...</a>
+			<ul>
+				<li>
+					<a href="#">That's so cool!</a>
+					<ul>
+						<li>
+                            <a href="#">How'd you get into it?!</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Delusional Confidence</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Everyone says I should do stand-up</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Do they? Do it. You won't.</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <li>
+                                        <a href="#">*Insert Sad Life Event</a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">I'll bet you get a lot of material here!</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">Yeah, but you won't like the jokes <br> I write about this conversation.</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#">*Offers Idea for a Joke*</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="#">Don't.</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Just trust me.</a>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="#">Where do you perform?</a>
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <a href="#">Literally anywhere people will<br> look at and listen to me.</a>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <a href="#">What do you say in your little skits?</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#">Just say jokes. Or bits. Never skits. <br> Even if you're talking about Saturday Night Live,<br> those are "sketches," not "skits." <br> Skits are reserved for church camp <br>cautionary tales and corporate role plays.</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="#">What's it like to be a woman in comedy?</a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="#">Tread Lightly. Female comics are asked this <br> so often that they may lose their shit on you.</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#">Rough. Like so many other things <br> when you're a woman.</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>     
+                                </li>
+                            </ul>
+                        </li>
+					</ul>
+				</li>
+                <li>
+                    <a href="#">Really? Tell me a joke!</a>
+                    <ul>
+                        <li>
+                            <a href="#">No. Come to a show, damnit.</a>
+                        </li>
+                    </ul>
+                    
+                </li>
+			</ul>
+		</li>
+	</ul>
+</div>
 
 </body>
 </html>
